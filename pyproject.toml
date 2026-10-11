@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=80", "setuptools-scm[simple]>=9.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pendulum-simulation"
+dynamic = ["version"]
+requires-python = ">=3.14"
+description = "Physics simulation of a pendulum"
+readme = "README.md"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+authors = [
+    { name = "blm34", email = "pypi.escalate394@passmail.net"},
+    { name = "ClownFish321"}
+]
+keywords = ["pendulum", "physics", "maths", "simulation"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.14",
+]
+
+[project.urls]
+Homepage = "https://github.com/ock-inc/pendulum-simulation/"
+Repository = "https://github.com/ock-inc/pendulum-simulation/"
+Issues = "https://github.com/ock-inc/pendulum-simulation/issues"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.16.5",
+    "ty>=0.0.78",
+]
+tests = [
+    "pytest>=9.1.1",
+]

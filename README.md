@@ -1,2 +1,3 @@
-# pendulum-simulation
+# Pendulum Simulation
+
 Physics simulation of a pendulum
