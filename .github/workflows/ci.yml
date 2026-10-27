@@ -2,8 +2,9 @@ name: Continuous Integration
 
 on:
   push:
-    pull_requests:
-      branches: ["main"]
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -11,9 +12,6 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
 
     steps:
       - name: Check out repository
