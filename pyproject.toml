@@ -12,7 +12,7 @@ license = "GPL-3.0-or-later"
 license-files = ["LICENSE"]
 authors = [
     { name = "blm34", email = "pypi.escalate394@passmail.net"},
-    { name = "ClownFish321"}
+    { name = "Robert Ogilvy", email = "64547073+ClownFish321@users.noreply.github.com"}
 ]
 keywords = ["pendulum", "physics", "maths", "simulation"]
 classifiers = [
