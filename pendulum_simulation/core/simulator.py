@@ -44,8 +44,13 @@ class Simulator[S: AbsState]:
         """Take a single step in the simulation.
 
         Args:
-            control_vec: The value of the inputs to control the system"""
-        control_vec = np.atleast_1d(np.asarray(control_vec, dtype=float))
+            control_vec: The value of the inputs to control the system
+                defaults to zeros for a system with no inputs
+        """
+        if control_vec is None:
+            control_vec = np.zeros(self.system.control_dim)
+        else:
+            control_vec = np.atleast_1d(np.asarray(control_vec, dtype=float))
 
         if control_vec.shape != (self.system.control_dim,):
             raise ValueError(
@@ -56,6 +61,7 @@ class Simulator[S: AbsState]:
             self.state.as_array(),
             self.time,
             self.control_dt,
+            control_vec,
         )
         new_state = self.system.state_type.from_array(new_state_vec)
 

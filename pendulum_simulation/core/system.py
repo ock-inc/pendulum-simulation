@@ -36,14 +36,14 @@ class Constraint:
         """
 
         def _check(state: AbsState) -> bool:
-            if field not in AbsState.field_names():
+            if field not in type(state).field_names():
                 raise ValueError(
                     f"Field {field} not present on {type(state).__name__} state"
                 )
 
             value = getattr(state, field)
 
-            return value < minimum or value > maximum
+            return minimum <= value <= maximum
 
         return cls(name, field, _check)
 
