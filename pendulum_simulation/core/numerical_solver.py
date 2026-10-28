@@ -59,6 +59,7 @@ class EulerSolver(AbsSolver):
 
 class RK4Solver(AbsSolver):
     """4th-order Runge-Kutta solver"""
+
     def solve(
         self,
         start_values: np.ndarray,
@@ -72,13 +73,9 @@ class RK4Solver(AbsSolver):
         t = start_time
         y = np.asarray(start_values, dtype=float)
 
-        for _ in range(self):
-            k1 = np.asarray(f(t, y, control_vec), dtype=float)
-            k2 = np.asarray(f(t + h / 2, y + h / 2 * k1, control_vec), dtype=float)
-            k3 = np.asarray(f(t + h / 2, y + h / 2 * k2, control_vec), dtype=float)
-            k4 = np.asarray(f(t + h, y + h * k3, control_vec), dtype=float)
+        k1 = np.asarray(f(t, y, control_vec), dtype=float)
+        k2 = np.asarray(f(t + h / 2, y + h / 2 * k1, control_vec), dtype=float)
+        k3 = np.asarray(f(t + h / 2, y + h / 2 * k2, control_vec), dtype=float)
+        k4 = np.asarray(f(t + h, y + h * k3, control_vec), dtype=float)
 
-            y = y + h / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
-            t += h
-
-        return y
+        return y + h / 6 * (k1 + 2 * k2 + 2 * k3 + k4)

@@ -40,7 +40,7 @@ class Simulator[S: AbsState]:
 
         self._constraints = list(system.constraints())
 
-    def step(self, control_vec: np.ndarray | float) -> S:
+    def step(self, control_vec: np.ndarray | float | None = None) -> S:
         """Take a single step in the simulation.
 
         Args:
