@@ -1,4 +1,3 @@
-
 from dataclasses import dataclass
 
 from pendulum_simulation.core.state import AbsState

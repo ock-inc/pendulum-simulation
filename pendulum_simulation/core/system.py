@@ -80,9 +80,20 @@ class AbsPhysicsSystem[S: AbsState](ABC):
         state_vec: np.ndarray,
         control_vec: np.ndarray,
     ) -> np.ndarray:
-        """dy/dt for the state vector y under a control input."""
-        raise NotImplementedError
+        """dy/dt for the state vector y under a control input.
 
+        Args:
+            time: Current time in seconds.
+            state_vec: State as an array, in the field order of `state_type`.
+            control_vec: Control inputs of shape `(control_dim,)`, held constant over the step.
+        """
+        raise NotImplementedError
+    
+    @abstractmethod
+    def energy(self, state: S) -> float:
+        """Total mechanical energy (kinetic + potential) in the given state."""
+        raise NotImplementedError
+    
     def constraints(self) -> Sequence[Constraint]:
         """The constraints for the system."""
         return ()

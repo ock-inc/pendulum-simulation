@@ -8,7 +8,7 @@ from .system import AbsPhysicsSystem
 
 
 class Simulator[S: AbsState]:
-    """Integrates any PhysicsSystem over one control interval with adaptive RK45."""
+    """Integrates any PhysicsSystem over one control interval with a specified solver."""
 
     def __init__(
         self,

@@ -1,4 +1,5 @@
 from pendulum_simulation.core.numerical_solver import RK4Solver
+from pendulum_simulation.core.runner import run
 from pendulum_simulation.core.simulator import Simulator
 from pendulum_simulation.systems.single_pendulum import PendulumState, SimplePendulum
 
@@ -10,15 +11,16 @@ sim = Simulator(
     solver=RK4Solver,
 )
 
-times, thetas, energies = [sim.time], [sim.state.theta], [system.energy(sim.state)]
+trajectory = run(sim, duration=10.0)
 
-for _ in range(1000):
-    sim.step()
-    times.append(sim.time)
-    thetas.append(sim.state.theta)
-    energies.append(system.energy(sim.state))
+theta = trajectory.field("theta")
+energies = [system.energy(system.state_type.from_array(row)) for row in trajectory.states]
 
-for i in range(0, len(times), 100):
-    print(f"t={times[i]:6.2f}  theta={thetas[i]: .4f}  E={energies[i]:.6f}")
+for i in range(0, len(trajectory.times), 100):
+    print(
+        f"t={trajectory.times[i]:6.2f} s  "
+        f"theta={theta[i]: .4f} rad  "
+        f"E={energies[i]:.6f} J"
+    )
 
-print(f"energy drift: {max(energies) - min(energies):.2e}")
+print(f"energy drift: {max(energies) - min(energies):.2e} J")
