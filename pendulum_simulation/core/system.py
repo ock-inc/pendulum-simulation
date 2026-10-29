@@ -88,12 +88,12 @@ class AbsPhysicsSystem[S: AbsState](ABC):
             control_vec: Control inputs of shape `(control_dim,)`, held constant over the step.
         """
         raise NotImplementedError
-    
+
     @abstractmethod
     def energy(self, state: S) -> float:
         """Total mechanical energy (kinetic + potential) in the given state."""
         raise NotImplementedError
-    
+
     def constraints(self) -> Sequence[Constraint]:
         """The constraints for the system."""
         return ()

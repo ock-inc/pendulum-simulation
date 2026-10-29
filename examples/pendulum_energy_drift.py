@@ -26,4 +26,6 @@ def energy_drift(solver: type[AbsSolver], steps: int = 1000, dt: float = 0.01) -
 
 if __name__ == "__main__":
     for solver in (EulerSolver, RK4Solver):
-        print(f"{solver.__name__:>12}: relative energy drift = {energy_drift(solver):.2e}")
+        print(
+            f"{solver.__name__:>12}: relative energy drift = {energy_drift(solver):.2e}"
+        )

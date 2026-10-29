@@ -68,8 +68,7 @@ def run(
         n_steps * dt, duration, rel_tol=1e-9, abs_tol=1e-12
     ):
         raise ValueError(
-            f"duration {duration} is not a non-negative multiple of "
-            f"control_dt {dt}"
+            f"duration {duration} is not a non-negative multiple of control_dt {dt}"
         )
 
     control_dim = simulator.system.control_dim

@@ -14,7 +14,9 @@ sim = Simulator(
 trajectory = run(sim, duration=10.0)
 
 theta = trajectory.field("theta")
-energies = [system.energy(system.state_type.from_array(row)) for row in trajectory.states]
+energies = [
+    system.energy(system.state_type.from_array(row)) for row in trajectory.states
+]
 
 for i in range(0, len(trajectory.times), 100):
     print(

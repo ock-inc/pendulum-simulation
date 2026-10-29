@@ -39,14 +39,16 @@ class AbsSolver(ABC):
         """
         raise NotImplementedError
 
+
 class EulerSolver(AbsSolver):
     """Basic forward Euler solver"""
+
     def solve(
-            self,
-            start_values: np.ndarray,
-            start_time: float,
-            time_step: float,
-            control_vec: np.ndarray,
+        self,
+        start_values: np.ndarray,
+        start_time: float,
+        time_step: float,
+        control_vec: np.ndarray,
     ) -> np.ndarray:
         """Estimate the state at the end of one time step using Euler's method."""
 
@@ -56,6 +58,7 @@ class EulerSolver(AbsSolver):
             control_vec,
         )
         return start_values + time_step * derivatives
+
 
 class RK4Solver(AbsSolver):
     """4th-order Runge-Kutta solver"""
