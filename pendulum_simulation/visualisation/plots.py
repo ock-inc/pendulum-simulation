@@ -29,6 +29,7 @@ def _prepare(
     if any(t.field_names != names for t in trajs):
         raise ValueError("All trajectories must have the same state fields")
 
+    out: list[str | None]
     if labels is None:
         out: list[str | None] = (
             [None] if len(trajs) == 1 else [f"run {i + 1}" for i in range(len(trajs))]
