@@ -317,12 +317,8 @@ name = "pendulum-simulation"
 source = { editable = "." }
 default-groups = ["dev", "tests"]
 dependencies = [
-    { name = "numpy" },
-]
-
-[package.optional-dependencies]
-visualisation = [
     { name = "matplotlib" },
+    { name = "numpy" },
 ]
 
 [package.dev-dependencies]
@@ -336,10 +332,9 @@ tests = [
 
 [package.metadata]
 requires-dist = [
-    { name = "matplotlib", marker = "extra == 'visualisation'", specifier = ">=3.11.2" },
+    { name = "matplotlib", specifier = ">=3.11.2" },
     { name = "numpy", specifier = ">=2.5.4" },
 ]
-provides-extras = ["visualisation"]
 
 [package.metadata.requires-dev]
 dev = [

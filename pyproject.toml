@@ -21,10 +21,6 @@ classifiers = [
 ]
 dependencies = [
     "numpy>=2.5.4",
-]
-
-[project.optional-dependencies]
-visualisation = [
     "matplotlib>=3.11.2",
 ]
 
