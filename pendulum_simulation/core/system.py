@@ -36,7 +36,7 @@ class Constraint:
         """
 
         def _check(state: AbsState) -> bool:
-            if field not in type(state).field_names():
+            if field not in state.field_names():
                 raise ValueError(
                     f"Field {field} not present on {type(state).__name__} state"
                 )
