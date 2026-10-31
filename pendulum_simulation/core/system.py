@@ -105,3 +105,8 @@ class AbsPhysicsSystem[S: AbsState](ABC):
                 raise InvalidStateError(
                     f"{c.field} violates constraint '{c.name}'", state, c.name
                 )
+
+    @abstractmethod
+    def energy(self, state: S) -> float:
+        """Total energy in the given state."""
+        raise NotImplementedError
