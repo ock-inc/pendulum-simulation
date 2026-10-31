@@ -8,7 +8,7 @@ from .state import PendulumState
 class SimplePendulum(AbsPhysicsSystem[PendulumState]):
     """Point mass on a massless rod, theta measured from hanging down.
 
-    theta'' = -(g / L) sin(theta) + tau / (m L^2) - (b / (m L^2)) theta'
+    θ'' = -(g / L) sin(θ) + τ / (m L^2) - (b / (m L^2)) θ'
     """
 
     def __init__(

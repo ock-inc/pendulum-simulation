@@ -41,3 +41,8 @@ class AbsState(ABC):
     def field_names(cls) -> tuple[str, ...]:
         """The names of fields defining the state."""
         return tuple(f.name for f in fields(cls))
+
+    @property
+    def energy(self) -> float:
+        """Total energy in the given state."""
+        raise NotImplementedError

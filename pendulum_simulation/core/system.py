@@ -89,11 +89,6 @@ class AbsPhysicsSystem[S: AbsState](ABC):
         """
         raise NotImplementedError
 
-    @abstractmethod
-    def energy(self, state: S) -> float:
-        """Total mechanical energy (kinetic + potential) in the given state."""
-        raise NotImplementedError
-
     def constraints(self) -> Sequence[Constraint]:
         """The constraints for the system."""
         return ()

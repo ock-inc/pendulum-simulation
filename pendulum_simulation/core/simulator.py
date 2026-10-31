@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import itertools
+import math
+from _collections_abc import Callable, Iterator
+
 import numpy as np
 
 from .numerical_solver import AbsSolver
@@ -36,6 +40,7 @@ class Simulator[S: AbsState]:
         self.atol = atol
 
         self.time = 0.0
+        self.control = np.zeros(system.control_dim)
         self.solver = solver(system.derivatives, rtol, atol)
 
         self._constraints = list(system.constraints())
@@ -69,5 +74,40 @@ class Simulator[S: AbsState]:
 
         self.state = new_state
         self.time += self.control_dt
+        self.control = control_vec
 
         return self.state
+
+    def run(
+        self,
+        duration: float | None = None,
+        controller: Callable[[S], np.ndarray] | None = None,
+    ) -> Iterator[S]:
+        """Step repeatedly, yielding the result of each step as it happens.
+
+        Args:
+            duration: How long to run for, in whole control steps. None runs forever.
+            controller: Chooses the control from the current state each step.
+                If omitted, zero control is applied.
+        """
+
+        n_steps = None
+        if duration is not None:
+            n_steps = round(duration / self.control_dt)
+            if not math.isclose(
+                n_steps * self.control_dt, duration, rel_tol=1e-9, abs_tol=1e-12
+            ):
+                raise ValueError(
+                    f"duration {duration} is not a multiple of control_dt {self.control_dt}"
+                )
+
+        def generate():
+            counter = itertools.count() if n_steps is None else range(n_steps)
+            for _ in counter:
+                if controller is None:
+                    control = None
+                else:
+                    control = controller(self.state)
+                yield self.step(control)
+
+        return generate()
