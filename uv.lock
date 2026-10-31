@@ -315,7 +315,6 @@ wheels = [
 [[package]]
 name = "pendulum-simulation"
 source = { editable = "." }
-default-groups = ["dev", "tests"]
 dependencies = [
     { name = "matplotlib" },
     { name = "numpy" },

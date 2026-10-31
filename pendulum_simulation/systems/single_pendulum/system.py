@@ -8,7 +8,7 @@ from .state import PendulumState
 class SimplePendulum(AbsPhysicsSystem[PendulumState]):
     """Point mass on a massless rod, theta measured from hanging down.
 
-    theta'' = -(g / L) sin(theta) - (b / (m L^2)) theta'
+    theta'' = -(g / L) sin(theta) + tau / (m L^2) - (b / (m L^2)) theta'
     """
 
     def __init__(
@@ -34,7 +34,7 @@ class SimplePendulum(AbsPhysicsSystem[PendulumState]):
 
     @property
     def control_bounds(self) -> tuple[np.ndarray, np.ndarray]:
-        # Minimum and maximum applied torque, in N m.
+        """Minimum and maximum applied torque (Nm)"""
         return (
             np.array([-10.0]),
             np.array([10.0]),
