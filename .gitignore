@@ -221,3 +221,6 @@ __marimo__/
 
 # Example scripts and experiments
 examples/
+
+# MacOS Finder folder display settings
+.DS_Store
