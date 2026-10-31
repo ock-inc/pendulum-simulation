@@ -48,7 +48,7 @@ class Simulator[S: AbsState]:
                 defaults to zeros for a system with no inputs
         """
         if control_vec is None:
-            control_vec = np.zeros(self.system.control_dim)
+            control_vec = np.zeros(self.system.control_dim, dtype=float)
         else:
             control_vec = np.atleast_1d(np.asarray(control_vec, dtype=float))
 

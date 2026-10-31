@@ -83,7 +83,7 @@ class AbsPhysicsSystem[S: AbsState](ABC):
         """dy/dt for the state vector y under a control input.
 
         Args:
-            time: Current time in seconds.
+            time: Current time.
             state_vec: State as an array, in the field order of `state_type`.
             control_vec: Control inputs of shape `(control_dim,)`, held constant over the step.
         """
