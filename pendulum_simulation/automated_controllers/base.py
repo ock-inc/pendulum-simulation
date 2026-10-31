@@ -4,11 +4,11 @@ from abc import ABC, abstractmethod
 
 import numpy as np
 
-from .state import AbsState
-from .system import AbsPhysicsSystem
+from pendulum_simulation.core.state import AbsState
+from pendulum_simulation.core.system import AbsPhysicsSystem
 
 
-class AbsController[S: AbsState](ABC):
+class AbsAutomatedController[S: AbsState](ABC):
     """Maps a state to a control vector, clipped to the system's actuator bounds."""
 
     def __init__(self, system: AbsPhysicsSystem[S]):
