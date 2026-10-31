@@ -1,9 +1,9 @@
 import numpy as np
 import pytest
 
-from pendulum_simulation.core.numerical_solver import RK4Solver
 from pendulum_simulation.core.runner import run
 from pendulum_simulation.core.simulator import Simulator
+from pendulum_simulation.numerical_solvers.rk4 import RK4Solver
 from pendulum_simulation.systems.single_pendulum import PendulumState, SimplePendulum
 
 
