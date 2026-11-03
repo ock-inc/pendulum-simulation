@@ -218,3 +218,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Example scripts and experiments
+examples/
+
+# MacOS Finder folder display settings
+.DS_Store

@@ -36,14 +36,14 @@ class Constraint:
         """
 
         def _check(state: AbsState) -> bool:
-            if field not in AbsState.field_names():
+            if field not in state.field_names():
                 raise ValueError(
                     f"Field {field} not present on {type(state).__name__} state"
                 )
 
             value = getattr(state, field)
 
-            return value < minimum or value > maximum
+            return minimum <= value <= maximum
 
         return cls(name, field, _check)
 
@@ -80,7 +80,13 @@ class AbsPhysicsSystem[S: AbsState](ABC):
         state_vec: np.ndarray,
         control_vec: np.ndarray,
     ) -> np.ndarray:
-        """dy/dt for the state vector y under a control input."""
+        """dy/dt for the state vector y under a control input.
+
+        Args:
+            time: Current time.
+            state_vec: State as an array, in the field order of `state_type`.
+            control_vec: Control inputs of shape `(control_dim,)`, held constant over the step.
+        """
         raise NotImplementedError
 
     def constraints(self) -> Sequence[Constraint]:
@@ -99,3 +105,8 @@ class AbsPhysicsSystem[S: AbsState](ABC):
                 raise InvalidStateError(
                     f"{c.field} violates constraint '{c.name}'", state, c.name
                 )
+
+    @abstractmethod
+    def energy(self, state: S) -> float:
+        """Total energy in the given state."""
+        raise NotImplementedError

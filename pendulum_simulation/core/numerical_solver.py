@@ -28,12 +28,14 @@ class AbsSolver(ABC):
         start_values: np.ndarray,
         start_time: float,
         time_step: float,
+        input_vec: np.ndarray,
     ) -> np.ndarray:
         """Solve for the state in the next time step.
 
         Args:
-            state_values: The initial values of the variables
+            start_values: The initial values of the variables
             start_time: The time at the start of the step
             time_step: How far ahead to solve for
+            input_vec: Input to the derivative function
         """
         raise NotImplementedError
