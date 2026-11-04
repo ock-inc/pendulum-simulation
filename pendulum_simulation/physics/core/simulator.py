@@ -5,9 +5,10 @@ from collections.abc import Callable, Generator
 
 import numpy as np
 
+from pendulum_simulation.system.core.abs_state import AbsState
+from pendulum_simulation.system.core.abs_system import AbsPhysicsSystem
+
 from .numerical_solver import AbsSolver
-from .state import AbsState
-from .system import AbsPhysicsSystem
 
 
 class Simulator[S: AbsState]:
