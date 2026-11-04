@@ -1,5 +1,4 @@
 import numpy as np
-
 from pendulum_simulation.core.system import AbsPhysicsSystem
 
 from .state import PendulumState
