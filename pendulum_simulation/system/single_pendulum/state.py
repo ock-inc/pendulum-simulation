@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from pendulum_simulation.core.state import AbsState
+from pendulum_simulation.system.core.abs_state import AbsState
 
 
 @dataclass(frozen=True)

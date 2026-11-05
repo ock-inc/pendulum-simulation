@@ -5,9 +5,9 @@ from collections.abc import Sequence
 
 import numpy as np
 
+from .abs_state import AbsState
 from .constraint import Constraint
 from .exceptions import InvalidStateError
-from .state import AbsState
 
 
 class AbsPhysicsSystem[S: AbsState](ABC):

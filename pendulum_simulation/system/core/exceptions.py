@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .state import AbsState
+from .abs_state import AbsState
 
 
 class InvalidStateError(Exception):

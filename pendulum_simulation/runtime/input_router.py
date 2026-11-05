@@ -1,8 +1,12 @@
 from collections.abc import Mapping
 from dataclasses import dataclass
 
-from ..core.control import ControlChannel
-from ..visualisation.ui_events import InputEvent, KeyEvent, ValueChangedEvent
+from pendulum_simulation.system.core.control import ControlChannel
+from pendulum_simulation.visualisation.ui_events import (
+    InputEvent,
+    KeyEvent,
+    ValueChangedEvent,
+)
 
 
 @dataclass(frozen=True)

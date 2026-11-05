@@ -4,7 +4,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Self
 
-from .state import AbsState
+from .abs_state import AbsState
 
 
 @dataclass(frozen=True)

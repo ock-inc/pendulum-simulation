@@ -1,8 +1,8 @@
 from collections.abc import Mapping
 
-from ..core.control import ControlChannel
-from ..runtime.input_router import InputRouter, KeyBinding
-from ..visualisation.backends.base import SceneGui
+from pendulum_simulation.runtime.input_router import InputRouter, KeyBinding
+from pendulum_simulation.system.core.control import ControlChannel
+from pendulum_simulation.visualisation.backends.base import SceneGui
 
 
 def wire_input(
