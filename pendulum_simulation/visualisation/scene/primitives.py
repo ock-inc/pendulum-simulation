@@ -25,17 +25,19 @@ class Primitive(ABC):
     style: Style = field(default_factory=Style)
 
 
+@dataclass(kw_only=True)
 class Line(Primitive):
     """A straight line between 2 points."""
 
     kind = "line"
 
-    p0: Vector
-    p1: Vector
+    p0: Point
+    p1: Point
 
 
+@dataclass(kw_only=True)
 class Polyline(Primitive):
-    """A line made up of straight lines between an iterable of points."""
+    """A line made up of straight lines between a sequence of points."""
 
     kind = "polyline"
 
@@ -46,10 +48,10 @@ class Polyline(Primitive):
     def __post_init__(self):
         self._points = deque(maxlen=self.capacity)
 
-    def push(self, point: Vector):
+    def push(self, point: Point):
         self._points.append(point)
 
-    def pop(self) -> Vector:
+    def pop(self) -> Point:
         return self._points.popleft()
 
     def set_points(self, points: np.ndarray):
@@ -59,26 +61,30 @@ class Polyline(Primitive):
 
     @property
     def array_points(self) -> np.ndarray:
-        return np.array(vec for vec in self._points)
+        return np.array(self._points)
 
 
+@dataclass(kw_only=True)
 class Circle(Primitive):
     """A circle with a centre and a radius."""
 
     kind = "circle"
 
-    center: Vector
+    center: Point
     radius: float
 
 
+@dataclass(kw_only=True)
 class Rect(Primitive):
-    """A rectangle with a centre, side lengths, and an angle."""
+    """A rectangle with a centre, side lengths, and an angle.
+
+    Angle is anticlockwise positive, and size is (width, height)"""
 
     kind = "rect"
 
-    center: Vector
+    center: Point
     size: Vector
-    angle: float
+    angle: float = 0.0
 
     @property
     def corners(self) -> tuple[Point, ...]:
@@ -103,12 +109,13 @@ class Rect(Primitive):
         )
 
 
+@dataclass(kw_only=True)
 class Arrow(Primitive):
     """An arrow that points in a given direction."""
 
     kind = "arrow"
 
-    origin: Vector
+    origin: Point
     vector: Vector
     head_fraction: float = 0.25
     head_angle: float = math.radians(25)
@@ -145,12 +152,13 @@ class Arrow(Primitive):
         return tuple(pts[:-1])
 
 
+@dataclass(kw_only=True)
 class Text(Primitive):
     """A text object."""
 
     kind = "text"
 
-    position: Vector
+    position: Point
     text: str
     align_h: Literal["left", "centre", "right"] = "centre"
     align_v: Literal["bottom", "centre", "top"] = "centre"
