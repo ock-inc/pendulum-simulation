@@ -7,17 +7,18 @@ import numpy as np
 
 from pendulum_simulation.system.core.abs_state import AbsState
 from pendulum_simulation.system.core.abs_system import AbsPhysicsSystem
+from pendulum_simulation.system.core.abs_system_properties import AbsSystemProperties
 
 from .numerical_solver import AbsSolver
 
 
-class Simulator[S: AbsState]:
+class Simulator[S: AbsState, P: AbsSystemProperties]:
     """Integrates any PhysicsSystem over one control interval with a specified solver."""
 
     def __init__(
         self,
         initial_state: S,
-        system: AbsPhysicsSystem[S],
+        system: AbsPhysicsSystem[S, P],
         control_dt: float,
         solver: type[AbsSolver],
         rtol: float = 1e-6,
@@ -43,7 +44,7 @@ class Simulator[S: AbsState]:
         self.control = np.zeros(system.control_dim)
         self.solver = solver(system.derivatives, rtol, atol)
 
-        self._constraints = list(system.constraints())
+        self._constraints = list(system.properties.constraints)
 
     def step(self, control_vec: np.ndarray | float | None = None) -> S:
         """Take a single step in the simulation.
@@ -70,7 +71,7 @@ class Simulator[S: AbsState]:
         )
         new_state = self.system.state_type.from_array(new_state_vec)
 
-        self.system.validate(new_state)
+        self.system.properties.validate(new_state)
 
         self.state = new_state
         self.time += self.control_dt
