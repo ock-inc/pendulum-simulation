@@ -1,6 +1,6 @@
 import numpy as np
 
-from pendulum_simulation.core.numerical_solver import AbsSolver  # adjust path
+from ..core.numerical_solver import AbsSolver  # adjust path
 
 # Dormand-Prince coefficients
 C = np.array([0, 1 / 5, 3 / 10, 4 / 5, 8 / 9, 1, 1])

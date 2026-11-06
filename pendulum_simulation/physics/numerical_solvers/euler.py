@@ -1,6 +1,6 @@
 import numpy as np
 
-from pendulum_simulation.core.numerical_solver import AbsSolver
+from ..core.numerical_solver import AbsSolver
 
 
 class EulerSolver(AbsSolver):
