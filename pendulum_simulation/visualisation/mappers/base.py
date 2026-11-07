@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from pendulum_simulation.core.state import AbsState
+from pendulum_simulation.system.core.abs_state import AbsState
 
 from ..scene.scene import Scene
 

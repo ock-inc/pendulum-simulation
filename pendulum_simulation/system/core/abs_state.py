@@ -13,6 +13,12 @@ class AbsState(ABC):
 
     ANGLE_FIELDS: ClassVar[tuple[str, ...]]
 
+    def __post_init__(self):
+        """Normalise all angle fields to the range [-pi, pi)."""
+        for name in self.ANGLE_FIELDS:
+            angle = getattr(self, name)
+            object.__setattr__(self, name, angle % (2 * np.pi) - np.pi)
+
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
 

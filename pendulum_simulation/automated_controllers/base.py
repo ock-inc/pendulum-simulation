@@ -4,15 +4,16 @@ from abc import ABC, abstractmethod
 
 import numpy as np
 
-from pendulum_simulation.core.state import AbsState
-from pendulum_simulation.core.system import AbsPhysicsSystem
+from pendulum_simulation.system.core.abs_state import AbsState
+from pendulum_simulation.system.core.abs_system import AbsPhysicsSystem
+from pendulum_simulation.system.core.abs_system_properties import AbsSystemProperties
 
 
-class AbsAutomatedController[S: AbsState](ABC):
+class AbsAutomatedController[S: AbsState, P: AbsSystemProperties](ABC):
     """Maps a state to a control vector, clipped to the system's actuator bounds."""
 
-    def __init__(self, system: AbsPhysicsSystem[S]):
-        self.low, self.high = system.control_bounds
+    def __init__(self, system: AbsPhysicsSystem[S, P]):
+        self.low, self.high = system.properties.control_bounds
 
     def __call__(self, state: S) -> np.ndarray:
         u = np.atleast_1d(np.asarray(self.compute_control(state), dtype=float))
